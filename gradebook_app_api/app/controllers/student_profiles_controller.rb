@@ -1,9 +1,11 @@
 class StudentProfilesController < ApplicationController
   before_action :set_student_profile, only: [:show, :update, :destroy]
+  before_action :authorized
 
   # GET /student_profiles
   def index
-    @student_profiles = StudentProfile.all
+    @student_profiles = StudentProfile.find_by user: @user.id
+    
 
     render json: @student_profiles
   end
@@ -16,6 +18,7 @@ class StudentProfilesController < ApplicationController
   # POST /student_profiles
   def create
     @student_profile = StudentProfile.new(student_profile_params)
+    @student_profile.user = @user.id
 
     if @student_profile.save
       render json: @student_profile, status: :created, location: @student_profile
