@@ -1,34 +1,27 @@
+import React from 'react'
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+import {Route, Link, Switch} from 'react-router-dom'
+import Home from './pages/Home'
+import {BrowserRouter} from 'react-router-dom'
+import Signup from './pages/Signup'
+import Login from './pages/Login';
+import StudentProfile from './pages/StudentProfile';
+
+export const GlobalCtx = React.createContext(null)
 
 function App() {
   return (
     <div className="App">
-      <Jumbotron>
-        <h1>School Phone</h1>
-        <p>
-          A one-stop platform for teacher-parent communication needs.
-        </p>
-        <p>
-          <Button variant="primary">Learn more</Button>
-        </p>
-      </Jumbotron>
-      
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
-          </Card.Text>
-
-        </Card.Body>
-      </Card>
+      <BrowserRouter>
+        <Switch>
+        <Route path = "/" render = {(rp) => <Home/>}/>
+        <Route path = "/signup" render = {(rp) => <Signup/>}/>
+        <Route path = "/login" render = {(rp) => <Login/>}/>
+        <Route path = "/student_profile" render = {(...rp) => <StudentProfile/>}/>
+        </Switch>
+        </BrowserRouter>
     </div>
   );
 }
